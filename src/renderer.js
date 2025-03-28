@@ -1,10 +1,13 @@
-import { createApp } from 'vue';
-import PrimeVue from 'primevue/config';
-import App from './App.vue';
-import Button from 'primevue/button';
-import Nora from '@primeuix/themes/Nora';
-import 'primeflex/primeflex.css';
-import './assets/primeflex-overrides.css';
+import { createApp } from "vue";
+import PrimeVue from "primevue/config";
+import App from "./App.vue";
+import Nora from "@primeuix/themes/Nora";
+import "primeflex/primeflex.css";
+import "./assets/primeflex-overrides.css";
+
+// Импорты компонентов
+import TabMenu from "primevue/tabmenu";
+import Button from "primevue/button";
 
 const app = createApp(App);
 
@@ -12,11 +15,12 @@ app.use(PrimeVue, {
   theme: {
     preset: Nora,
     options: {
-      darkModeSelector: '.my-app-dark',
-    }
-  }
+      darkModeSelector: ".my-app-dark",
+    },
+  },
 });
 
-app.component('Button', Button);
+app.component("Button", Button);
+app.component("TabMenu", TabMenu);
 
-app.mount('#app');
+app.mount("#app");
