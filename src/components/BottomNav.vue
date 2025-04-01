@@ -30,12 +30,10 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--surface-a);
-    border-top: 1px solid var(--surface-d);
 }
 
 :deep(.p-tabmenu .p-tabmenu-nav) {
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 :deep(.p-tabmenu .p-tabmenu-nav .p-menuitem) {

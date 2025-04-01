@@ -1,9 +1,10 @@
 import { createApp } from "vue";
 import PrimeVue from "primevue/config";
 import App from "./App.vue";
-import Nora from "@primeuix/themes/Nora";
+import Nora from "@primeuix/themes/Material";
 import "primeflex/primeflex.css";
 import "./assets/primeflex-overrides.css";
+import "primeicons/primeicons.css";
 
 // Импорты компонентов
 import TabMenu from "primevue/tabmenu";
