@@ -37,7 +37,9 @@
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
     "primevue": "^4.3.3",
+    "video.js": "^7.21.7",
     "vue": "^3.5.13",
-    "vue-hls-video-player": "^1.0.1"
+    "vue-hls-video-player": "^1.0.1",
+    "vue-video-player": "^6.0.0"
   }
 }

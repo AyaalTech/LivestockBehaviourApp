@@ -1,11 +1,8 @@
 <template>
   <div>
-    <Button label="Toggle Dark Mode" @click="toggleDarkMode" class="dark-mode-toggle" />
-
     <div class="content">
       <component :is="currentPageComponent" />
     </div>
-
     <BottomNav @navigate="changePage" />
   </div>
 </template>
@@ -23,7 +20,7 @@ export default {
     HomePage,
     AnalysisPage,
     StreamPage,
-    SettingsPage
+    SettingsPage,
   },
   data() {
     return {
@@ -41,9 +38,6 @@ export default {
     }
   },
   methods: {
-    toggleDarkMode() {
-      document.documentElement.classList.toggle('my-app-dark');
-    },
     changePage(page) {
       this.currentPage = page;
     }
@@ -52,13 +46,11 @@ export default {
 </script>
 
 <style>
-.dark-mode-toggle {
-  position: fixed;
-  z-index: 1000;
-}
-
 .content {
-  padding-bottom: 60px;
-  min-height: calc(100vh - 60px);
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 </style>

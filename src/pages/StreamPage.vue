@@ -1,17 +1,32 @@
 <template>
     <div>
         <h1>Стрим</h1>
-        <p>Потоковые данные в реальном времени</p>
+        <p class="sdas">Потоковые данные в реальном времени</p>
 
         <div class="stream-container">
-            <VideoPlayer type="default" link="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" :isMuted="true"
-                :isControls="false" class="stream-player" :autoplay="true" />
+            <HLSPlayer />
         </div>
     </div>
 </template>
 
-<script setup>
-import { VideoPlayer } from 'vue-hls-video-player';
+<script>
+import HLSPlayer from '../components/HLSPlayer.vue';
+
+export default {
+    components: {
+        HLSPlayer
+    }
+}
 </script>
 
-<style></style>
+<style>
+.stream-player {
+    width: 10%;
+    border: 1px solid var(--p-red-300);
+    border-radius: 0.25rem;
+}
+
+.stream-container {
+    margin: 0 auto;
+}
+</style>

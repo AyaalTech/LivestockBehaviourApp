@@ -1,7 +1,9 @@
 import { createApp } from "vue";
 import PrimeVue from "primevue/config";
 import App from "./App.vue";
-import Nora from "@primeuix/themes/Material";
+import Material from "@primeuix/themes/Material";
+import { definePreset } from "@primeuix/themes";
+
 import "primeflex/primeflex.css";
 import "./assets/primeflex-overrides.css";
 import "primeicons/primeicons.css";
@@ -12,11 +14,29 @@ import Button from "primevue/button";
 
 const app = createApp(App);
 
+const RatimirTheme = definePreset(Material, {
+  semantic: {
+    primary: {
+      50: "#fee2e2",
+      100: "#fecaca",
+      200: "#fca5a5",
+      300: "#f87171",
+      400: "#ef4444",
+      500: "#dc2626",
+      600: "#b91c1c",
+      700: "#991b1b",
+      800: "#7f1d1d",
+      900: "#63171b",
+      950: "#450a0a",
+    },
+  },
+});
+
 app.use(PrimeVue, {
   theme: {
-    preset: Nora,
+    preset: RatimirTheme,
     options: {
-      darkModeSelector: ".my-app-dark",
+      darkModeSelector: ".setting-app-dark",
     },
   },
 });
