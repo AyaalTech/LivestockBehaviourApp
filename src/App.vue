@@ -47,8 +47,8 @@ export default {
 
 <style>
 .content {
-  padding-top: 1.5vh;
-  padding-bottom: 1.5vh;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 
   padding-left: 1rem;
   padding-right: 1rem;
