@@ -13,6 +13,7 @@ import HomePage from './pages/HomePage.vue';
 import AnalysisPage from './pages/AnalysisPage.vue';
 import StreamPage from './pages/StreamPage.vue';
 import SettingsPage from './pages/SettingsPage.vue';
+import InfoPage from './pages/InfoPage.vue';
 
 export default {
   components: {
@@ -21,6 +22,7 @@ export default {
     AnalysisPage,
     StreamPage,
     SettingsPage,
+    InfoPage
   },
   data() {
     return {
@@ -33,7 +35,8 @@ export default {
         'home': 'HomePage',
         'analysis': 'AnalysisPage',
         'stream': 'StreamPage',
-        'settings': 'SettingsPage'
+        'settings': 'SettingsPage',
+        'info': 'InfoPage'
       }[this.currentPage];
     }
   },

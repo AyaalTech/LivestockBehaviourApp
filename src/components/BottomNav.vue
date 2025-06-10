@@ -12,7 +12,8 @@ export default {
                 { label: 'Главная', icon: 'pi pi-home', command: () => this.navigateTo('home') },
                 { label: 'Анализ', icon: 'pi pi-chart-bar', command: () => this.navigateTo('analysis') },
                 { label: 'Стрим', icon: 'pi pi-video', command: () => this.navigateTo('stream') },
-                { label: 'Настройки', icon: 'pi pi-cog', command: () => this.navigateTo('settings') }
+                { label: 'Настройки', icon: 'pi pi-cog', command: () => this.navigateTo('settings') },
+                { label: 'Справка', icon: 'pi pi-info-circle', command: () => this.navigateTo('info') }
             ]
         }
     },
@@ -30,5 +31,7 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 -2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 </style>

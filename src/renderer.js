@@ -16,6 +16,8 @@ import Slider from "primevue/slider";
 import InputText from "primevue/inputtext";
 import Select from "primevue/select";
 import Panel from "primevue/panel";
+import TreeTable from "primevue/treetable";
+import Column from "primevue/column";
 
 const app = createApp(App);
 
@@ -53,5 +55,6 @@ app.component("Slider", Slider);
 app.component("InputText", InputText);
 app.component("Select", Select);
 app.component("Panel", Panel);
-
+app.component("TreeTable", TreeTable);
+app.component("Column", Column);
 app.mount("#app");
