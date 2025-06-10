@@ -1,8 +1,8 @@
 :root {
     font-family: "Roboto", sans-serif;
     ::-webkit-scrollbar {
-    display: none;
-}
+        display: none;
+    }
 }
 
 body {

@@ -18,6 +18,7 @@ import Select from "primevue/select";
 import Panel from "primevue/panel";
 import TreeTable from "primevue/treetable";
 import Column from "primevue/column";
+import Fieldset from "primevue/fieldset";
 
 const app = createApp(App);
 
@@ -57,4 +58,5 @@ app.component("Select", Select);
 app.component("Panel", Panel);
 app.component("TreeTable", TreeTable);
 app.component("Column", Column);
+app.component("Fieldset", Fieldset);
 app.mount("#app");
