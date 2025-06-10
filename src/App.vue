@@ -1,9 +1,9 @@
 <template>
   <div>
+    <BottomNav @navigate="changePage" />
     <div class="content">
       <component :is="currentPageComponent" />
     </div>
-    <BottomNav @navigate="changePage" />
   </div>
 </template>
 
@@ -13,6 +13,7 @@ import HomePage from './pages/HomePage.vue';
 import AnalysisPage from './pages/AnalysisPage.vue';
 import StreamPage from './pages/StreamPage.vue';
 import SettingsPage from './pages/SettingsPage.vue';
+import InfoPage from './pages/InfoPage.vue';
 
 export default {
   components: {
@@ -21,6 +22,7 @@ export default {
     AnalysisPage,
     StreamPage,
     SettingsPage,
+    InfoPage
   },
   data() {
     return {
@@ -33,7 +35,8 @@ export default {
         'home': 'HomePage',
         'analysis': 'AnalysisPage',
         'stream': 'StreamPage',
-        'settings': 'SettingsPage'
+        'settings': 'SettingsPage',
+        'info': 'InfoPage'
       }[this.currentPage];
     }
   },
@@ -47,10 +50,10 @@ export default {
 
 <style>
 .content {
-  padding-top: 1.5vh;
-  padding-bottom: 1.5vh;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 </style>

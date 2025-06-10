@@ -1,6 +1,6 @@
 <template>
-    <VideoPlayer type="default" link="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" :isMuted="true"
-        :isControls="false" class="stream-player" :autoplay="true" />
+    <VideoPlayer type="default" link="http://192.168.9.101:8000/output2.m3u8" :isMuted="true" :isControls="true"
+        class="stream-player" :autoplay="true" />
 </template>
 
 <script>

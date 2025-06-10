@@ -11,6 +11,14 @@ import "primeicons/primeicons.css";
 // Импорты компонентов
 import TabMenu from "primevue/tabmenu";
 import Button from "primevue/button";
+import Chart from "primevue/chart";
+import Slider from "primevue/slider";
+import InputText from "primevue/inputtext";
+import Select from "primevue/select";
+import Panel from "primevue/panel";
+import TreeTable from "primevue/treetable";
+import Column from "primevue/column";
+import Fieldset from "primevue/fieldset";
 
 const app = createApp(App);
 
@@ -43,5 +51,12 @@ app.use(PrimeVue, {
 
 app.component("Button", Button);
 app.component("TabMenu", TabMenu);
-
+app.component("Chart", Chart);
+app.component("Slider", Slider);
+app.component("InputText", InputText);
+app.component("Select", Select);
+app.component("Panel", Panel);
+app.component("TreeTable", TreeTable);
+app.component("Column", Column);
+app.component("Fieldset", Fieldset);
 app.mount("#app");
