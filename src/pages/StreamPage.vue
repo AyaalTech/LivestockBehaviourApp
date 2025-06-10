@@ -4,9 +4,8 @@
         <div class="card mb-3">
             <TreeTable v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="checkbox"
                 tableStyle="min-width: 50rem">
-                <Column field="name" header="Name" expander style="width: 33%"></Column>
-                <Column field="size" header="Size" style="width: 33%"></Column>
-                <Column field="type" header="Type" style="width: 33%"></Column>
+                <Column field="name" header="Адрес" expander style="width: 50%"></Column>
+                <Column field="size" header="Количество" style="width: 50%"></Column>
             </TreeTable>
         </div>
     </Fieldset>
@@ -27,7 +26,7 @@
     <div class="grid">
         <div v-for="(camera, index) in cameras" :key="index" class="col-6">
             <div class="card">
-                <Panel :header="`${camera.name} (ID: ${camera.id})`">
+                <Panel :header="`${camera.location} (ID: ${camera.id})`">
                     <VideoPlayer type="default" :link="camera.url" :isMuted="true" :isControls="true"
                         class="stream-player" :autoplay="true" />
                 </Panel>
@@ -50,16 +49,17 @@ export default {
             cameras: [
                 {
                     id: '23-1',
-                    name: 'Фермовская 23',
+                    location: 'Фермовская 23',
                     url: 'http://192.168.9.101:8000/output2.m3u8'
                 },
                 {
                     id: '27-1',
-                    name: 'Фермовская 27',
+                    location: 'Фермовская 27',
                     url: 'http://192.168.9.101:8000/output1.m3u8'
                 }
             ],
-            newCameraName: '',
+            newCameraId: '',
+            newCameraLocation: '',
             newCameraUrl: ''
         };
     },
@@ -68,60 +68,29 @@ export default {
             {
                 key: '0',
                 data: {
-                    name: 'Applications',
-                    size: '100mb',
-                    type: 'Folder'
+                    name: 'Фермовская 23',
+                    size: '3'
                 },
                 children: [
                     {
                         key: '0-0',
                         data: {
-                            name: 'Vue.js',
-                            size: '25mb',
-                            type: 'File'
+                            name: '23-1'
                         }
                     },
                     {
                         key: '0-1',
                         data: {
-                            name: 'React',
-                            size: '25mb',
-                            type: 'File'
+                            name: '23-2'
                         }
                     }
                 ]
             },
-            {
-                key: '1',
-                data: {
-                    name: 'Documents',
-                    size: '75mb',
-                    type: 'Folder'
-                },
-                children: [
-                    {
-                        key: '1-0',
-                        data: {
-                            name: 'Resume.docx',
-                            size: '30mb',
-                            type: 'Document'
-                        }
-                    },
-                    {
-                        key: '1-1',
-                        data: {
-                            name: 'Project.pdf',
-                            size: '45mb',
-                            type: 'PDF'
-                        }
-                    }
-                ]
-            }
         ];
     },
     methods: {
         addCamera() {
-            if (this.newCameraName && this.newCameraUrl) {
+            if (this.newCameraLocation && this.newCameraUrl) {
                 this.cameras.push({
                     id: this.newCameraId,
                     location: this.newCameraLocation,
@@ -140,5 +109,6 @@ export default {
 .stream-player {
     width: 100%;
     border-radius: 0.25rem;
+    aspect-ratio: 16 / 9;
 }
 </style>
