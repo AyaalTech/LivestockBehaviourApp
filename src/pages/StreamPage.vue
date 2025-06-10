@@ -1,7 +1,5 @@
 <template>
-    <h1>Стрим</h1>
     <p>Потоковые данные в реальном времени</p>
-
     <div class="card mb-3">
         <TreeTable v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="checkbox"
             tableStyle="min-width: 50rem">

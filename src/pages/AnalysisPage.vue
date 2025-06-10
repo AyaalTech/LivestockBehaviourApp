@@ -1,7 +1,5 @@
 <template>
     <div class="p-4">
-        <h1 class="text-2xl font-bold mb-6">Система мониторинга поведения птиц</h1>
-
         <div class="grid gap-8">
             <!-- График активности по времени суток -->
             <div class="card">

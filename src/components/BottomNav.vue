@@ -27,11 +27,8 @@ export default {
 
 <style scoped>
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 -2px 4px -1px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    z-index: 1000;
+    top: 0;
 }
 </style>

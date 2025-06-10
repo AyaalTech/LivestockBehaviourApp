@@ -1,9 +1,9 @@
 <template>
   <div>
+    <BottomNav @navigate="changePage" />
     <div class="content">
       <component :is="currentPageComponent" />
     </div>
-    <BottomNav @navigate="changePage" />
   </div>
 </template>
 
@@ -50,10 +50,10 @@ export default {
 
 <style>
 .content {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
     <div class="settings-page">
-        <h1>Настройки</h1>
         <p>Настройки приложения</p>
 
         <div class="flex flex-row mb-3">
