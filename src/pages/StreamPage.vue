@@ -1,12 +1,23 @@
 <template>
-    <p>Потоковые данные в реальном времени</p>
+    <h3>Мониторинг камер фермы в реальном времени, с возможностью добавления новых камер.</h3>
 
     <Fieldset legend="Выбор камер">
-        <div class="grid">
-            <div v-for="camera in allCameras" :key="camera.id" class="col-12 md:col-3">
-                <div class="flex align-items-center">
-                    <Checkbox :inputId="camera.id" :value="camera" v-model="selectedCameras" class="mr-2" />
-                    <label :for="camera.id">{{ camera.location }} (ID: {{ camera.id }})</label>
+        <div class="mb-3 flex gap-2">
+            <Button label="Выбрать все" icon="pi pi-check-square" class="p-button-sm" @click="selectAllCameras" />
+            <Button label="Сбросить выбор" icon="pi pi-times" class="p-button-sm p-button-secondary"
+                @click="clearSelectedCameras" />
+        </div>
+
+        <div v-for="(cameras, groupName) in groupedCameras" :key="groupName" class="mb-3">
+            <p class="mb-2">
+                по адресу: <strong>{{ groupName }}</strong>
+            </p>
+            <div class="grid">
+                <div v-for="camera in cameras" :key="camera.id" class="col-12 md:col-3">
+                    <div class="flex align-items-center">
+                        <Checkbox :inputId="camera.id" :value="camera" v-model="selectedCameras" class="mr-2" />
+                        <label :for="camera.id">{{ camera.location }} (ID: {{ camera.id }})</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,8 +32,17 @@
         </div>
     </Fieldset>
 
+    <div class="mb-3 flex align-items-center gap-2">
+        <label for="columnSelect" class="flex align-items-center gap-2">
+            <i class="pi pi-th-large"></i>
+            <strong>Сетка:</strong>
+        </label>
+        <Dropdown id="columnSelect" v-model="columnClass" :options="columnOptions" optionLabel="label"
+            optionValue="value" class="w-12 md:w-3" placeholder="Выберите размер" />
+    </div>
+
     <div class="grid">
-        <div v-for="(camera, index) in selectedCameras" :key="index" class="col-12 md:col-6">
+        <div v-for="(camera, index) in selectedCameras" :key="index" :class="['card-wrapper', columnClass]">
             <div class="card">
                 <Panel :header="`${camera.location} (ID: ${camera.id})`">
                     <VideoPlayer type="default" :link="camera.url" :isMuted="true" :isControls="true"
@@ -57,7 +77,13 @@ export default {
             selectedCameras: [],
             newCameraId: '',
             newCameraLocation: '',
-            newCameraUrl: ''
+            newCameraUrl: '',
+            columnClass: 'md:col-6',
+            columnOptions: [
+                { label: '1 колонка', value: 'md:col-12' },
+                { label: '2 колонки', value: 'md:col-6' },
+                { label: '4 колонки', value: 'md:col-3' }
+            ]
         };
     },
     mounted() {
@@ -65,6 +91,19 @@ export default {
         this.selectedCameras = this.allCameras.filter(cam =>
             cam.location.includes('Фермовская')
         );
+    },
+    computed: {
+        groupedCameras() {
+            const groups = {};
+            this.allCameras.forEach(cam => {
+                const group = cam.location.split(' ')[0]; // первое слово
+                if (!groups[group]) {
+                    groups[group] = [];
+                }
+                groups[group].push(cam);
+            });
+            return groups;
+        }
     },
     methods: {
         addCamera() {
@@ -79,6 +118,12 @@ export default {
                 this.newCameraLocation = '';
                 this.newCameraUrl = '';
             }
+        },
+        selectAllCameras() {
+            this.selectedCameras = [...this.allCameras];
+        },
+        clearSelectedCameras() {
+            this.selectedCameras = [];
         }
     }
 };

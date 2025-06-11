@@ -20,7 +20,7 @@ import TreeTable from "primevue/treetable";
 import Column from "primevue/column";
 import Fieldset from "primevue/fieldset";
 import Checkbox from "primevue/checkbox";
-import CheckboxGroup from "primevue/checkboxgroup";
+import Dropdown from "primevue/dropdown";
 
 const app = createApp(App);
 
@@ -62,4 +62,5 @@ app.component("TreeTable", TreeTable);
 app.component("Column", Column);
 app.component("Fieldset", Fieldset);
 app.component("Checkbox", Checkbox);
+app.component("Dropdown", Dropdown);
 app.mount("#app");
