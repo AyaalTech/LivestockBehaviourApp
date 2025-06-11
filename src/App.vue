@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar @navigate="changePage" />
+    <NavBar :currentPage="currentPage" @navigate="changePage" />
     <div class="content">
       <component :is="currentPageComponent" />
     </div>
