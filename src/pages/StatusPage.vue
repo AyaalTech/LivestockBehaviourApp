@@ -1,8 +1,7 @@
 <template>
-    <div :class="['system-status', statusClass, 'flex', 'align-items-center', 'gap-2', 'mb-3', 'mt-3']">
-        <span class="status-indicator mr-2" @click="toggleStatus" style="cursor: pointer"
-            title="Кликните для переключения статуса"></span>
-        <strong class="status-text">{{ statusText }}</strong>
+    <div :class="['system-status', statusClass, 'flex', 'align-items-center', 'gap-2', 'mb-3']">
+        <span class="status-indicator mr-2" @click="toggleStatus" style="cursor: pointer"></span>
+        <h3 class="status-text">{{ statusText }}</h3>
     </div>
 
     <Fieldset legend="Статус серверов" class="mb-3">
@@ -20,6 +19,16 @@
                 </div>
             </div>
         </div>
+    </Fieldset>
+
+    <Fieldset legend="Рекомендации по снижению нагрузки на сервера" class="mb-3">
+        <ul class="recommendations-list">
+            <li>Уменьшить разрешение входного видеопотока</li>
+            <li>Увеличить задержку между входящим видеопотоком и его обработкой</li>
+            <li>Ограничить количество одновременно обрабатываемых видеопотоков</li>
+            <li>Переключение на облегчённую версию модели <span class="planned">(в разработке)</span></li>
+            <li>Пакетная обработка кадров вместо потоковой <span class="planned">(в разработке)</span></li>
+        </ul>
     </Fieldset>
 </template>
 
@@ -90,10 +99,6 @@ export default {
 </script>
 
 <style scoped>
-.system-status {
-    font-size: 1.2rem;
-}
-
 .status-indicator {
     width: 16px;
     height: 16px;
@@ -150,5 +155,16 @@ export default {
 .system-status,
 .server-stats {
     --p-progressbar-value-background: #4caf50;
+}
+
+.recommendations-list {
+    list-style-type: disc;
+}
+
+.recommendations-list .planned {
+    font-style: italic;
+    color: #999;
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
 }
 </style>
