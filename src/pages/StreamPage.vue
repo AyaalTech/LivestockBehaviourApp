@@ -1,30 +1,48 @@
 <template>
-    <p>Потоковые данные в реальном времени</p>
-    <Fieldset legend="Список адресов и камер">
-        <div class="card mb-3">
-            <TreeTable v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="checkbox"
-                tableStyle="min-width: 50rem">
-                <Column field="name" header="Адрес" expander style="width: 50%"></Column>
-                <Column field="size" header="Количество" style="width: 50%"></Column>
-            </TreeTable>
+    <h3>Мониторинг камер фермы в реальном времени, с возможностью добавления новых камер.</h3>
+
+    <Fieldset legend="Выбор камер">
+        <div class="mb-3 flex gap-2">
+            <Button label="Выбрать все" icon="pi pi-check-square" class="p-button-sm" @click="selectAllCameras" />
+            <Button label="Сбросить выбор" icon="pi pi-times" class="p-button-sm p-button-secondary"
+                @click="clearSelectedCameras" />
+        </div>
+
+        <div v-for="(cameras, groupName) in groupedCameras" :key="groupName" class="mb-3">
+            <p class="mb-2">
+                по адресу: <strong>{{ groupName }}</strong>
+            </p>
+            <div class="grid">
+                <div v-for="camera in cameras" :key="camera.id" class="col-12 md:col-3">
+                    <div class="flex align-items-center">
+                        <Checkbox :inputId="camera.id" :value="camera" v-model="selectedCameras" class="mr-2" />
+                        <label :for="camera.id">{{ camera.location }} (ID: {{ camera.id }})</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </Fieldset>
+
     <Fieldset legend="Добавление камер" class="mb-3">
-        <div class="flex flex-row">
-            <div class="field w-2 mb-0 mr-2">
-                <InputText id="camera-name" v-model="newCameraId" placeholder="Номер камеры" class="w-full" />
-            </div>
-            <div class="field w-3 mb-0 mr-2">
-                <InputText id="camera-name" v-model="newCameraLocation" placeholder="Адрес фермы" class="w-full" />
-            </div>
-            <div class="field w-3 mb-0 mr-2">
-                <InputText id="stream-url" v-model="newCameraUrl" placeholder="URL потока" class="w-full" />
-            </div>
-            <Button label="Добавить" icon="pi pi-plus" iconPos="left" @click="addCamera" />
+        <div class="flex flex-wrap gap-2">
+            <InputText v-model="newCameraId" placeholder="Номер камеры" class="w-12 md:w-2" />
+            <InputText v-model="newCameraLocation" placeholder="Адрес фермы" class="w-12 md:w-3" />
+            <InputText v-model="newCameraUrl" placeholder="URL потока" class="w-12 md:w-3" />
+            <Button label="Добавить" icon="pi pi-plus" @click="addCamera" />
         </div>
     </Fieldset>
+
+    <div class="mb-3 flex align-items-center gap-2">
+        <label for="columnSelect" class="flex align-items-center gap-2">
+            <i class="pi pi-th-large"></i>
+            <strong>Сетка:</strong>
+        </label>
+        <Dropdown id="columnSelect" v-model="columnClass" :options="columnOptions" optionLabel="label"
+            optionValue="value" class="w-12 md:w-3" placeholder="Выберите размер" />
+    </div>
+
     <div class="grid">
-        <div v-for="(camera, index) in cameras" :key="index" class="col-6">
+        <div v-for="(camera, index) in selectedCameras" :key="index" :class="['card-wrapper', columnClass]">
             <div class="card">
                 <Panel :header="`${camera.location} (ID: ${camera.id})`">
                     <VideoPlayer type="default" :link="camera.url" :isMuted="true" :isControls="true"
@@ -44,9 +62,7 @@ export default {
     },
     data() {
         return {
-            nodes: [],
-            selectedKey: {},
-            cameras: [
+            allCameras: [
                 {
                     id: '23-1',
                     location: 'Фермовская 23',
@@ -58,48 +74,56 @@ export default {
                     url: 'http://192.168.9.101:8000/output1.m3u8'
                 }
             ],
+            selectedCameras: [],
             newCameraId: '',
             newCameraLocation: '',
-            newCameraUrl: ''
+            newCameraUrl: '',
+            columnClass: 'md:col-6',
+            columnOptions: [
+                { label: '1 колонка', value: 'md:col-12' },
+                { label: '2 колонки', value: 'md:col-6' },
+                { label: '4 колонки', value: 'md:col-3' }
+            ]
         };
     },
     mounted() {
-        this.nodes = [
-            {
-                key: '0',
-                data: {
-                    name: 'Фермовская 23',
-                    size: '3'
-                },
-                children: [
-                    {
-                        key: '0-0',
-                        data: {
-                            name: '23-1'
-                        }
-                    },
-                    {
-                        key: '0-1',
-                        data: {
-                            name: '23-2'
-                        }
-                    }
-                ]
-            },
-        ];
+        // Камеры с Фермовской выбраны изначально
+        this.selectedCameras = this.allCameras.filter(cam =>
+            cam.location.includes('Фермовская')
+        );
+    },
+    computed: {
+        groupedCameras() {
+            const groups = {};
+            this.allCameras.forEach(cam => {
+                const group = cam.location.split(' ')[0]; // первое слово
+                if (!groups[group]) {
+                    groups[group] = [];
+                }
+                groups[group].push(cam);
+            });
+            return groups;
+        }
     },
     methods: {
         addCamera() {
-            if (this.newCameraLocation && this.newCameraUrl) {
-                this.cameras.push({
+            if (this.newCameraId && this.newCameraLocation && this.newCameraUrl) {
+                const newCam = {
                     id: this.newCameraId,
                     location: this.newCameraLocation,
                     url: this.newCameraUrl
-                });
+                };
+                this.allCameras.push(newCam);
                 this.newCameraId = '';
                 this.newCameraLocation = '';
                 this.newCameraUrl = '';
             }
+        },
+        selectAllCameras() {
+            this.selectedCameras = [...this.allCameras];
+        },
+        clearSelectedCameras() {
+            this.selectedCameras = [];
         }
     }
 };

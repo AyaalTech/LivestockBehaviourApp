@@ -9,7 +9,7 @@ export default {
     data() {
         return {
             items: [
-                { label: 'Главная', icon: 'pi pi-home', command: () => this.navigateTo('home') },
+                { label: 'Статус', icon: 'pi pi-server', command: () => this.navigateTo('status') },
                 { label: 'Анализ', icon: 'pi pi-chart-bar', command: () => this.navigateTo('analysis') },
                 { label: 'Стрим', icon: 'pi pi-video', command: () => this.navigateTo('stream') },
                 { label: 'Настройки', icon: 'pi pi-cog', command: () => this.navigateTo('settings') },
