@@ -1,11 +1,13 @@
 <template>
     <h3>Мониторинг камер фермы в реальном времени, с возможностью добавления новых камер.</h3>
 
-    <Fieldset legend="Выбор камер">
+    <Fieldset legend="Выбор камер" class="mb-3">
         <div class="mb-3 flex gap-2">
             <Button label="Выбрать все" icon="pi pi-check-square" class="p-button-sm" @click="selectAllCameras" />
             <Button label="Сбросить выбор" icon="pi pi-times" class="p-button-sm p-button-secondary"
                 @click="clearSelectedCameras" />
+            <Button label="Удалить выбранные" icon="pi pi-trash" class="p-button-sm p-button-warn"
+                @click="deleteSelectedCameras" />
         </div>
 
         <div v-for="(cameras, groupName) in groupedCameras" :key="groupName" class="mb-3">
@@ -46,7 +48,7 @@
             <div class="card">
                 <Panel :header="`${camera.location} (ID: ${camera.id})`">
                     <VideoPlayer type="default" :link="camera.url" :isMuted="true" :isControls="true"
-                        class="stream-player" :autoplay="true" />
+                        class="stream-player shadow-3" :autoplay="true" />
                 </Panel>
             </div>
         </div>
@@ -123,6 +125,11 @@ export default {
             this.selectedCameras = [...this.allCameras];
         },
         clearSelectedCameras() {
+            this.selectedCameras = [];
+        },
+        deleteSelectedCameras() {
+            const selectedIds = new Set(this.selectedCameras.map(cam => cam.id));
+            this.allCameras = this.allCameras.filter(cam => !selectedIds.has(cam.id));
             this.selectedCameras = [];
         }
     }

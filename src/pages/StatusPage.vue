@@ -11,11 +11,17 @@
             <div class="flex align-items-center gap-3 mt-3">
                 <div class="stat-item col-4">
                     <label>GPU загрузка:</label>
-                    <ProgressBar :value="server.cpu" :showValue="true" unit="%" class="h-2rem" />
+                    <ProgressBar :value="server.cpu" :showValue="true" unit="%" class="h-2rem" :class="{
+                        'high-load': server.cpu > 90,
+                        'medium-load': server.cpu > 75 && server.cpu <= 90
+                    }" />
                 </div>
                 <div class="stat-item col-4">
                     <label>Память:</label>
-                    <ProgressBar :value="server.memory" :showValue="true" unit="%" class="h-2rem" />
+                    <ProgressBar :value="server.memory" :showValue="true" unit="%" class="h-2rem" :class="{
+                        'high-load': server.memory > 90,
+                        'medium-load': server.memory > 75 && server.memory <= 90
+                    }" />
                 </div>
             </div>
         </div>
@@ -166,5 +172,13 @@ export default {
     color: #999;
     font-size: 0.85rem;
     margin-left: 0.5rem;
+}
+
+.high-load {
+    --p-progressbar-value-background: #f44336 !important;
+}
+
+.medium-load {
+    --p-progressbar-value-background: #ff9800 !important;
 }
 </style>
