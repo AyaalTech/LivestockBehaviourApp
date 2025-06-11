@@ -9,7 +9,7 @@
 
 <script>
 import BottomNav from './components/BottomNav.vue';
-import HomePage from './pages/HomePage.vue';
+import StatusPage from './pages/StatusPage.vue';
 import AnalysisPage from './pages/AnalysisPage.vue';
 import StreamPage from './pages/StreamPage.vue';
 import SettingsPage from './pages/SettingsPage.vue';
@@ -18,7 +18,7 @@ import InfoPage from './pages/InfoPage.vue';
 export default {
   components: {
     BottomNav,
-    HomePage,
+    StatusPage,
     AnalysisPage,
     StreamPage,
     SettingsPage,
@@ -26,13 +26,13 @@ export default {
   },
   data() {
     return {
-      currentPage: 'home'
+      currentPage: 'stream'
     }
   },
   computed: {
     currentPageComponent() {
       return {
-        'home': 'HomePage',
+        'status': 'StatusPage',
         'analysis': 'AnalysisPage',
         'stream': 'StreamPage',
         'settings': 'SettingsPage',
