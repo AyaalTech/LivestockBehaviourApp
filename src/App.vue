@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BottomNav @navigate="changePage" />
+    <NavBar @navigate="changePage" />
     <div class="content">
       <component :is="currentPageComponent" />
     </div>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import BottomNav from './components/BottomNav.vue';
+import NavBar from './components/NavBar.vue';
 import StatusPage from './pages/StatusPage.vue';
 import AnalysisPage from './pages/AnalysisPage.vue';
 import StreamPage from './pages/StreamPage.vue';
@@ -17,7 +17,7 @@ import InfoPage from './pages/InfoPage.vue';
 
 export default {
   components: {
-    BottomNav,
+    NavBar,
     StatusPage,
     AnalysisPage,
     StreamPage,

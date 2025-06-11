@@ -1,6 +1,6 @@
 <template>
-    <div class="bottom-nav">
-        <TabMenu :model="items" />
+    <div class="flex navbar justify-content-center shadow-3 w-full surface-overlay">
+        <TabMenu :model="items" style="margin: -1px;" />
     </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.bottom-nav {
+.navbar {
     position: sticky;
     z-index: 1000;
     top: 0;

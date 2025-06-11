@@ -46,7 +46,7 @@
             <div class="card">
                 <Panel :header="`${camera.location} (ID: ${camera.id})`">
                     <VideoPlayer type="default" :link="camera.url" :isMuted="true" :isControls="true"
-                        class="stream-player" :autoplay="true" />
+                        class="stream-player shadow-3" :autoplay="true" />
                 </Panel>
             </div>
         </div>
