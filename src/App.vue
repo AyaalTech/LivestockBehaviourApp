@@ -83,6 +83,6 @@ export default {
 
 <style scoped>
 .content {
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 3rem;
 }
 </style>

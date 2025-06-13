@@ -39,8 +39,8 @@
             <i class="pi pi-th-large"></i>
             <strong>Сетка:</strong>
         </label>
-        <Dropdown id="columnSelect" v-model="columnClass" :options="columnOptions" optionLabel="label"
-            optionValue="value" class="w-12 md:w-3" placeholder="Выберите размер" />
+        <Select id="columnSelect" v-model="columnClass" :options="columnOptions" optionLabel="label" optionValue="value"
+            class="w-12 md:w-3" placeholder="Выберите размер" />
     </div>
 
     <div class="grid">
@@ -61,6 +61,9 @@ import { VideoPlayer } from 'vue-hls-video-player';
 export default {
     components: {
         VideoPlayer
+    },
+    props: {
+        currentMode: String
     },
     data() {
         return {

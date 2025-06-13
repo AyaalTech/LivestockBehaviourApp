@@ -21,7 +21,6 @@ import Column from "primevue/column";
 import Fieldset from "primevue/fieldset";
 import Checkbox from "primevue/checkbox";
 import ProgressBar from "primevue/progressbar";
-import Dropdown from "primevue/dropdown";
 import Dialog from "primevue/dialog";
 import Card from "primevue/card";
 
@@ -66,7 +65,6 @@ app.component("Column", Column);
 app.component("Fieldset", Fieldset);
 app.component("Checkbox", Checkbox);
 app.component("ProgressBar", ProgressBar);
-app.component("Dropdown", Dropdown);
 app.component("Dialog", Dialog);
 app.component("Card", Card);
 app.mount("#app");
