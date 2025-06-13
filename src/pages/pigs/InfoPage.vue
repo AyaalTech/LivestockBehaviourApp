@@ -1,4 +1,3 @@
 <template>
-    <h3>PIG</h3>
-    <Fieldset legend="" class="mb-3"></Fieldset>
+    <h1>Свиньи</h1>
 </template>

@@ -1,58 +1,57 @@
 <template>
-    <div class="absolute top-4 left-4">
-        <Button label="Выбор режима" icon="pi pi-cog" @click="showDialog = true" />
+    <div>
+        <Button :label="currentMode === 'chickens' ? 'Свиньи' : 'Курицы'" @click="showConfirmationDialog"
+            class="mode-switcher" />
 
-        <Dialog v-model:visible="showDialog" header="Выберите режим" modal class="w-6">
-            <div class="flex gap-4 justify-center">
-                <Card class="w-6 cursor-pointer hover:shadow-lg" @click="select('chickens')" style="overflow: hidden">
-                    <template #header>
-                        <img alt=" user header" src="../assets/chicken.png" class="w-full" />
-                    </template>
-                    <template #title>Advanced Card</template>
-                    <template #subtitle>Card subtitle</template>
-                    <template #content>
-                        <p class="m-0">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error
-                            repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa
-                            ratione quam perferendis esse, cupiditate neque
-                            quas!
-                        </p>
-                    </template>
-                    <template #footer>
-                        <div class="flex gap-4 mt-1">
-                            <Button label="Cancel" severity="secondary" outlined class="w-full" />
-                            <Button label="Save" class="w-full" />
-                        </div>
-                    </template>
-                </Card>
-
-                <Card class="w-6 cursor-pointer hover:shadow-lg" @click="select('pigs')">
-
-                </Card>
+        <Dialog v-model:visible="displayConfirmation" header="Подтверждение" :style="{ width: '350px' }" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                <span>Приложение будет перезагружено. Продолжить?</span>
             </div>
+            <template #footer>
+                <Button label="Нет" icon="pi pi-times" @click="displayConfirmation = false" class="p-button-text" />
+                <Button label="Да" icon="pi pi-check" @click="confirmModeChange" class="p-button-text" autofocus />
+            </template>
         </Dialog>
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        visibleInitially: {
-            type: Boolean,
-            default: true
-        }
-    },
-    emits: ['modeSelected'],
-    data() {
-        return {
-            showDialog: this.visibleInitially
-        };
-    },
-    methods: {
-        select(mode) {
-            this.showDialog = false;
-            this.$emit('modeSelected', mode);
-        }
+<script setup>
+import { ref } from 'vue';
+
+const props = defineProps({
+    currentMode: {
+        type: String,
+        required: true,
+        default: 'chickens'
     }
+});
+
+const emit = defineEmits(['update:mode']);
+
+const displayConfirmation = ref(false);
+const pendingMode = ref(null);
+
+const showConfirmationDialog = () => {
+    pendingMode.value = props.currentMode === 'chickens' ? 'pigs' : 'chickens';
+    displayConfirmation.value = true;
+};
+
+const confirmModeChange = () => {
+    emit('update:mode', pendingMode.value);
+    displayConfirmation.value = false;
+    // window.location.reload();
 };
 </script>
+
+<style scoped>
+.confirmation-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mode-switcher {
+    margin: 0;
+}
+</style>

@@ -20,20 +20,39 @@
             </div>
         </div>
 
+        <h3>Режим работы</h3>
+        <ModeSelection :current-mode="currentMode" @update:mode="handleModeChange" />
+
         <Button label="Темная тема" @click="toggleDarkMode" class="dark-mode-toggle" />
     </div>
 </template>
 
 <script>
+import ModeSelection from '../../components/ModeSelection.vue';
+
 export default {
+    components: {
+        ModeSelection,
+    },
+    props: {
+        currentMode: {
+            type: String,
+            required: true
+        }
+    },
     methods: {
         toggleDarkMode() {
             document.documentElement.classList.toggle('setting-app-dark');
+        },
+        handleModeChange(newMode) {
+            this.$emit('update:mode', newMode);
         }
     }
 }
 </script>
 
 <style scoped>
-.dark-mode-toggle {}
+.dark-mode-toggle {
+    margin-top: 1rem;
+}
 </style>

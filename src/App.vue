@@ -1,18 +1,13 @@
 <template>
   <div>
-    <ModeSelection v-if="!modeSelected" @modeSelected="selectMode" />
-
-    <div v-if="modeSelected">
-      <NavBar :currentPage="currentPage" @navigate="changePage" />
-      <div class="content">
-        <component :is="currentPageComponent" />
-      </div>
+    <NavBar :currentPage="currentPage" @navigate="changePage" />
+    <div class="content">
+      <component :is="currentPageComponent" :current-mode="mode" @update:mode="selectMode" />
     </div>
   </div>
 </template>
 
 <script>
-import ModeSelection from './components/ModeSelection.vue';
 import NavBar from './components/NavBar.vue';
 
 // Chicken pages
@@ -31,7 +26,6 @@ import PigInfoPage from './pages/pigs/InfoPage.vue';
 
 export default {
   components: {
-    ModeSelection,
     NavBar,
 
     ChickenStatusPage,
@@ -48,13 +42,13 @@ export default {
   },
   data() {
     return {
-      mode: null,
+      mode: 'chickens',
       currentPage: 'stream'
     };
   },
   computed: {
     modeSelected() {
-      return this.mode !== null;
+      return true;
     },
     currentPageComponent() {
       const components = {
