@@ -10,14 +10,14 @@
             <h3 class="ml-2">{{ server.name }}</h3>
             <div class="flex align-items-center gap-3 mt-3">
                 <div class="stat-item col-4">
-                    <label>GPU загрузка:</label>
+                    <label class="mb-3">GPU загрузка:</label>
                     <ProgressBar :value="server.cpu" :showValue="true" unit="%" class="h-2rem" :class="{
                         'high-load': server.cpu > 90,
                         'medium-load': server.cpu > 75 && server.cpu <= 90
                     }" />
                 </div>
                 <div class="stat-item col-4">
-                    <label>Память:</label>
+                    <label class="mb-3">Память:</label>
                     <ProgressBar :value="server.memory" :showValue="true" unit="%" class="h-2rem" :class="{
                         'high-load': server.memory > 90,
                         'medium-load': server.memory > 75 && server.memory <= 90

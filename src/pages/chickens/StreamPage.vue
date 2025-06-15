@@ -2,7 +2,7 @@
     <h3>Мониторинг камер фермы в реальном времени, с возможностью добавления новых камер.</h3>
 
     <Fieldset legend="Выбор камер" class="mb-3">
-        <div class="mb-3 flex gap-2">
+        <div class="mb-3 flex gap-3 p-3">
             <Button label="Выбрать все" icon="pi pi-check-square" class="p-button-sm" @click="selectAllCameras" />
             <Button label="Сбросить выбор" icon="pi pi-times" class="p-button-sm p-button-secondary"
                 @click="clearSelectedCameras" />
@@ -10,10 +10,11 @@
                 @click="deleteSelectedCameras" />
         </div>
 
-        <div v-for="(cameras, groupName) in groupedCameras" :key="groupName" class="mb-3">
-            <p class="mb-2">
+        <div v-for="(cameras, groupName) in groupedCameras" :key="groupName" class="mb-3 px-3">
+            <p class="mb-3">
                 по адресу: <strong>{{ groupName }}</strong>
             </p>
+
             <div class="grid">
                 <div v-for="camera in cameras" :key="camera.id" class="col-12 md:col-3">
                     <div class="flex align-items-center">
@@ -26,7 +27,7 @@
     </Fieldset>
 
     <Fieldset legend="Добавление камер" class="mb-3">
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-3 p-3">
             <InputText v-model="newCameraId" placeholder="Номер камеры" class="w-12 md:w-2" />
             <InputText v-model="newCameraLocation" placeholder="Адрес фермы" class="w-12 md:w-3" />
             <InputText v-model="newCameraUrl" placeholder="URL потока" class="w-12 md:w-3" />
@@ -34,7 +35,7 @@
         </div>
     </Fieldset>
 
-    <div class="mb-3 flex align-items-center gap-2">
+    <div class="flex align-items-center gap-3 mb-3">
         <label for="columnSelect" class="flex align-items-center gap-2">
             <i class="pi pi-th-large"></i>
             <strong>Сетка:</strong>
@@ -43,7 +44,7 @@
             class="w-12 md:w-3" placeholder="Выберите размер" />
     </div>
 
-    <div class="grid">
+    <div class="grid mb-3">
         <div v-for="(camera, index) in selectedCameras" :key="index" :class="['card-wrapper', columnClass]">
             <div class="card">
                 <Panel :header="`${camera.location} (ID: ${camera.id})`">

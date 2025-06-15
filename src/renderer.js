@@ -23,6 +23,7 @@ import Checkbox from "primevue/checkbox";
 import ProgressBar from "primevue/progressbar";
 import Dialog from "primevue/dialog";
 import Card from "primevue/card";
+import Divider from "primevue/divider";
 
 const app = createApp(App);
 
@@ -67,4 +68,5 @@ app.component("Checkbox", Checkbox);
 app.component("ProgressBar", ProgressBar);
 app.component("Dialog", Dialog);
 app.component("Card", Card);
+app.component("Divider", Divider);
 app.mount("#app");
