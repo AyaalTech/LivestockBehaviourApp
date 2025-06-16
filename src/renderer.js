@@ -20,8 +20,10 @@ import TreeTable from "primevue/treetable";
 import Column from "primevue/column";
 import Fieldset from "primevue/fieldset";
 import Checkbox from "primevue/checkbox";
-import Dropdown from "primevue/dropdown";
 import ProgressBar from "primevue/progressbar";
+import Dialog from "primevue/dialog";
+import Card from "primevue/card";
+import Divider from "primevue/divider";
 
 const app = createApp(App);
 
@@ -63,6 +65,8 @@ app.component("TreeTable", TreeTable);
 app.component("Column", Column);
 app.component("Fieldset", Fieldset);
 app.component("Checkbox", Checkbox);
-app.component("Dropdown", Dropdown);
 app.component("ProgressBar", ProgressBar);
+app.component("Dialog", Dialog);
+app.component("Card", Card);
+app.component("Divider", Divider);
 app.mount("#app");
