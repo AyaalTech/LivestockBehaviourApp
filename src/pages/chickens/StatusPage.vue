@@ -26,7 +26,7 @@
             </div>
         </div>
     </Fieldset>
-
+    <CPUServer></CPUServer>
     <Fieldset legend="Рекомендации по снижению нагрузки на сервера" class="mb-3">
         <ul class="recommendations-list">
             <li>Уменьшить разрешение входного видеопотока</li>
@@ -39,7 +39,12 @@
 </template>
 
 <script>
+import CPUServer from '../../components/CPUServer.vue';
+
 export default {
+    components: {
+        CPUServer,
+    },
     props: {
         status: {
             type: String,
