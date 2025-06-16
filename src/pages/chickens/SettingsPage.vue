@@ -108,7 +108,25 @@ export default {
         },
         applyConfidence() {
             if (this.isValidConfidence(this.confidenceThreshold)) {
-                alert(`Порог уверенности применён: ${this.confidenceThreshold}`);
+                fetch('http://192.168.0.101:4000/change_conf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ conf: this.confidenceThreshold })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status) {
+                            alert(`Порог уверенности применён: ${this.confidenceThreshold}`);
+                        } else {
+                            alert('Ошибка при применении нового порога.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при запросе:', error);
+                        alert('Ошибка при соединении с сервером.');
+                    });
             } else {
                 alert('Некорректное значение уверенности. Введите число от 0.1 до 1.');
             }
