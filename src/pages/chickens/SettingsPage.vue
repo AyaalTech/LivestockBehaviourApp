@@ -86,9 +86,10 @@ export default {
             claheValue: 0,
             selectedModel: { label: 'chicken-behaviour-best.pt', value: 'chicken-behaviour-best.pt' },
             modelOptions: [
-                { label: 'chicken-behaviour-best.pt', value: 'chicken-behaviour-best.pt' },
-                { label: 'default.pt', value: 'default.pt' },
-                { label: 'experimental-model.pt', value: 'experimental-model.pt' }
+                { label: 'Поведение куриц - chicken_behavior.pt', value: 'chicken_behavior' },
+                { label: 'Сегментация куриц - chicken_detect.pt', value: 'chicken_detect' },
+                { label: 'Поведение свиней - pig_behavior.pt', value: 'pig_behavior' },
+                { label: 'Детекция свиней - pig_detect.pt', value: 'pig_detect' }
             ]
         }
     },
@@ -164,8 +165,26 @@ export default {
             }
         },
         applyModel() {
-            alert(`Выбрана модель: ${this.selectedModel.label}`);
-            this.$emit('update:model', this.selectedModel.value);
+            fetch('http://192.168.0.101:4000/change_model', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ model: this.selectedModel.value })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        alert(`Модель "${this.selectedModel.label}" успешно применена`);
+                        this.$emit('update:model', this.selectedModel.value);
+                    } else {
+                        alert('Ошибка при применении модели: ' + (data.error || 'неизвестная ошибка'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка соединения с сервером:', error);
+                    alert('Не удалось связаться с сервером');
+                });
         }
     }
 }
