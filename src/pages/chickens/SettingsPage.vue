@@ -133,7 +133,25 @@ export default {
         },
         applyClahe() {
             if (this.isValidClahe(this.claheValue)) {
-                alert(`CLAHE применён: ${this.claheValue}`);
+                fetch('http://192.168.0.101:4000/change_clahe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ clahe: this.claheValue })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status) {
+                            alert(`CLAHE применён: ${this.claheValue}`);
+                        } else {
+                            alert('Ошибка при применении CLAHE');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при запросе:', error);
+                        alert('Ошибка при соединении с сервером.');
+                    });
             } else {
                 alert('Некорректное значение CLAHE. Введите число от 0 до 4.');
             }
