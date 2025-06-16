@@ -68,18 +68,7 @@ export default {
     },
     data() {
         return {
-            allCameras: [
-                {
-                    id: '23-1',
-                    location: 'Фермовская 23',
-                    url: 'http://192.168.9.101:8000/output2.m3u8'
-                },
-                {
-                    id: '27-1',
-                    location: 'Фермовская 27',
-                    url: 'http://192.168.9.101:8000/output1.m3u8'
-                }
-            ],
+            allCameras: [],
             selectedCameras: [],
             newCameraId: '',
             newCameraLocation: '',
@@ -89,7 +78,8 @@ export default {
                 { label: '1 колонка', value: 'md:col-12' },
                 { label: '2 колонки', value: 'md:col-6' },
                 { label: '4 колонки', value: 'md:col-3' }
-            ]
+            ],
+            loading: false
         };
     },
     mounted() {
@@ -112,6 +102,19 @@ export default {
         }
     },
     methods: {
+        async fetchCameraData() {
+            this.loading = true;
+            try {
+                const response = await fetch('http://192.168.0.101:4000/streams');
+                const data = await response.json();
+                this.allCameras = data;
+                this.selectedCameras = [...data];
+            } catch (error) {
+                console.error('Ошибка при загрузке данных камер:', error);
+            } finally {
+                this.loading = false;
+            }
+        },
         addCamera() {
             if (this.newCameraId && this.newCameraLocation && this.newCameraUrl) {
                 const newCam = {
@@ -136,7 +139,14 @@ export default {
             this.allCameras = this.allCameras.filter(cam => !selectedIds.has(cam.id));
             this.selectedCameras = [];
         }
-    }
+    },
+    mounted() {
+        this.fetchCameraData();
+
+        this.pollingInterval = setInterval(() => {
+            this.fetchCameraData();
+        }, 10000);
+    },
 };
 </script>
 
